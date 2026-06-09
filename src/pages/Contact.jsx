@@ -15,7 +15,7 @@ const Contact = () => {
     if (meta) {
       meta.setAttribute(
         'content',
-        'Contact Majestic Sports in Dindigul, Tamil Nadu. Reach our expert coaches and certified stringers on WhatsApp (+91 99404 00532) or email for badminton gear advice, racket stringing, and product availability. Store at 5/279, Karur Rd, Dindigul.'
+        'Contact Majestic Sports in Dindigul, Tamil Nadu. Reach our expert coaches and certified stringers on WhatsApp (+91 90472 70451) or email for badminton gear advice, racket stringing, and product availability. Store at 5/279, Karur Rd, Dindigul.'
       );
     }
     const canonical = document.querySelector('link[rel="canonical"]');
