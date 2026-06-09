@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "majestic-sport",
+=======
+  "name": "scaffold",
+>>>>>>> 069ea5d4d0ca58aad666992831fae94bfb00067c
   "private": true,
   "version": "0.0.0",
   "type": "module",

@@ -1,6 +1,10 @@
 {
   "firestore": {
+<<<<<<< HEAD
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+=======
+    "rules": "firestore.rules"
+>>>>>>> 069ea5d4d0ca58aad666992831fae94bfb00067c
   }
 }
