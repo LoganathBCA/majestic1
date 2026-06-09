@@ -2,6 +2,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ── Helper functions ─────────────────────────────────────────────────────
+
     function isAdmin() {
       return request.auth != null &&
              request.auth.uid == "1uXFRjwJkFfX1PO7HXbRbTCl4Om2";
@@ -11,20 +13,33 @@ service cloud.firestore {
       return request.auth != null && request.auth.uid == uid;
     }
 
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // ── Products ─────────────────────────────────────────────────────────────
+    // Public read (product catalog) | Admin-only write (CRUD from dashboard)
     match /products/{productId} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
     }
 
+    // ── Categories ───────────────────────────────────────────────────────────
+    // Public read (shop filters, tabs) | Admin-only write
     match /categories/{categoryId} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
     }
 
+    // ── Users ────────────────────────────────────────────────────────────────
+    // Owner can read & write their own doc (subscribe modal saves whatsappNo)
+    // Admin can read all user docs (Subscribers panel + Broadcast)
+    // Admin can delete a user doc if needed (subscriber management)
     match /users/{uid} {
       allow read, write: if isOwner(uid);
-      allow read: if isAdmin();
+      allow read, delete: if isAdmin();
 
+      // Wishlist subcollection — owner only
       match /wishlist/{productId} {
         allow read, write: if isOwner(uid);
       }
