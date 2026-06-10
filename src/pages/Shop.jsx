@@ -186,15 +186,24 @@ const Shop = () => {
     return [priceRange[0], Math.min(priceRange[1], maxPrice)];
   }, [priceRange, maxPrice]);
 
+  // Find the active category document from the categories list
+  const activeCategoryDoc = useMemo(() => {
+    return activeCategories.find((c) => c.slug === activeCategory);
+  }, [activeCategories, activeCategory]);
+
   // Dynamic category product counts
   const categoryCounts = useMemo(() => {
     const counts = { all: activeProducts.length };
     activeProducts.forEach((p) => {
-      const slug = (p.categoryName || '').toLowerCase().replace(/\s+/g, '-');
-      counts[slug] = (counts[slug] || 0) + 1;
+      const cat = activeCategories.find((c) => c.id === p.categoryId) ||
+                  activeCategories.find((c) => c.name.toLowerCase() === (p.categoryName || '').toLowerCase());
+      const slug = cat ? cat.slug : (p.categoryName || '').toLowerCase().replace(/\s+/g, '-');
+      if (slug) {
+        counts[slug] = (counts[slug] || 0) + 1;
+      }
     });
     return counts;
-  }, [activeProducts]);
+  }, [activeProducts, activeCategories]);
 
   // Unique brands extracted from active product data
   const availableBrands = useMemo(
@@ -221,9 +230,10 @@ const Shop = () => {
   /* ── combined filter + sort pipeline on active data ────────── */
   const filteredProducts = useMemo(() => {
     return activeProducts
-      // 1. Category filter — match on slug or lowercased name
+      // 1. Category filter — match on categoryId, slug or lowercased name
       .filter((p) => {
         if (activeCategory === 'all') return true;
+        if (activeCategoryDoc && p.categoryId === activeCategoryDoc.id) return true;
         const slug = (p.categoryName || '').toLowerCase().replace(/\s+/g, '-');
         return slug === activeCategory || (p.categoryName || '').toLowerCase() === activeCategory;
       })
@@ -248,7 +258,7 @@ const Shop = () => {
             return 0;
         }
       });
-  }, [activeProducts, activeCategory, selectedBrands, effectivePriceRange, showNewOnly, sortBy]);
+  }, [activeProducts, activeCategory, activeCategoryDoc, selectedBrands, effectivePriceRange, showNewOnly, sortBy]);
 
   /* ── render ──────────────────────────────────────────────── */
   return (

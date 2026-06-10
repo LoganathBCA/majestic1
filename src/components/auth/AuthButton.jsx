@@ -118,6 +118,7 @@ const AuthButton = () => {
             <div className="dropdown-user-info">
               <span className="dropdown-username">{user.displayName}</span>
               <span className="dropdown-email">{user.email}</span>
+              <span className="dropdown-uid" style={{ fontSize: '10px', color: 'var(--outline)', marginTop: '4px', wordBreak: 'break-all', userSelect: 'all', display: 'block' }}>UID: {user.uid}</span>
             </div>
           </div>
 

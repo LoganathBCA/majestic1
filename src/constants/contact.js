@@ -1,7 +1,7 @@
 /** Central contact details — single source of truth for WhatsApp links */
 export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '919047270451';
 export const WHATSAPP_DISPLAY = '+91 90472 70451';
-export const SUPPORT_EMAIL = 'dshiners33@gmail.com';
+export const SUPPORT_EMAIL = 'majesticsportshubdindigul@gmail.com';
 export const HQ_ADDRESS = '5/279, Karur Rd, inside Strings Badminton Academy, Hanifa Nagar, Dindigul, Tamil Nadu 624001';
 export const INSTAGRAM_HANDLE = 'majestics_sports_dindigul';
 export const INSTAGRAM_URL = 'https://instagram.com/majestics_sports_dindigul';

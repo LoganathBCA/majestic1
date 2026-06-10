@@ -120,6 +120,7 @@ const ProductsPanel = () => {
     setFormError('');
 
     if (!name.trim()) { setFormError('Product name is required.'); return; }
+    if (!categoryId) { setFormError('Please select a category.'); return; }
     if (!price || isNaN(Number(price)) || Number(price) < 0) { setFormError('Enter a valid price.'); return; }
     if (!stock || isNaN(Number(stock)) || Number(stock) < 0) { setFormError('Enter a valid stock quantity.'); return; }
     if (!editingProduct && !imageFile) { setFormError('Please select a product image.'); return; }

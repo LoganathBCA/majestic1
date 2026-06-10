@@ -15,7 +15,11 @@ import { auth, db } from '../firebase/config';
 
 const AuthContext = createContext();
 
-const ADMIN_UID = import.meta.env.VITE_ADMIN_UID || '1uXFRjwJkFfX1PO7HXbRbTCl4Om2';
+const ADMIN_UIDS = [
+  import.meta.env.VITE_ADMIN_UID,
+  'ulRgKkzhMRVjEoopbnLTT1FiDwv1',
+  '1uXFRjwJkFfX1PO7HXbRbTCl4Om2'
+].filter(Boolean);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -106,13 +110,10 @@ export const AuthProvider = ({ children }) => {
   // openSubscribe — triggered by Subscribe buttons in Hero / Footer
   // -----------------------------------------------------------------------
   const openSubscribe = () => {
-    let branch = 'success';
     if (!user) {
-      branch = 'signin';
       setModalStep(1);
       setShowModal(true);
     } else if (!whatsappNo) {
-      branch = 'whatsapp';
       setModalStep(2);
       setShowModal(true);
     } else {
@@ -177,6 +178,9 @@ export const AuthProvider = ({ children }) => {
     fetchWhatsapp();
   }, [user, modalStep]); // re-run when modalStep changes (i.e. after save)
 
+  const isAdmin = user && ADMIN_UIDS.includes(user.uid);
+  const effectiveAdminUid = isAdmin ? user.uid : (import.meta.env.VITE_ADMIN_UID || 'ulRgKkzhMRVjEoopbnLTT1FiDwv1');
+
   return (
     <AuthContext.Provider
       value={{
@@ -190,7 +194,8 @@ export const AuthProvider = ({ children }) => {
         openSubscribe,
         closeSubscribe,
         submitWhatsApp,
-        ADMIN_UID
+        ADMIN_UID: effectiveAdminUid,
+        isAdmin
       }}
     >
       {children}

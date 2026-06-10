@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { buildWhatsAppUrl, WHATSAPP_DISPLAY, SUPPORT_EMAIL, HQ_ADDRESS, MAPS_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../../constants/contact';
+import { buildWhatsAppUrl, WHATSAPP_NUMBER, WHATSAPP_DISPLAY, SUPPORT_EMAIL, HQ_ADDRESS, MAPS_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../../constants/contact';
 
 const ContactSection = () => {
   const handleWhatsAppChat = () => {
@@ -60,7 +60,9 @@ const ContactSection = () => {
             </div>
             <div className="detail-info">
               <span className="detail-label">Call Us</span>
-              <span className="detail-value">{WHATSAPP_DISPLAY}</span>
+              <a href={`tel:+${WHATSAPP_NUMBER}`} className="detail-value" style={{ color: 'var(--secondary)', textDecoration: 'underline', textDecorationColor: 'rgba(0,80,204,0.3)', textUnderlineOffset: '3px' }}>
+                {WHATSAPP_DISPLAY}
+              </a>
             </div>
           </div>
 

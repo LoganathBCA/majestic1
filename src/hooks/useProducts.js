@@ -13,8 +13,9 @@ import {
 import { db } from '../firebase/config';
 
 // Cloudinary credentials (from scope.md — safe to expose; upload_preset is the auth layer)
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dath9ga29/image/upload';
-const CLOUDINARY_PRESET = 'majestic1';
+const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dp33qaeqw';
+const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+const CLOUDINARY_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'majesticspt';
 
 /**
  * uploadToCloudinary(file)
@@ -50,7 +51,7 @@ const deleteFromCloudinary = async (cloudinaryId) => {
     formData.append('upload_preset', CLOUDINARY_PRESET);
 
     await fetch(
-      `https://api.cloudinary.com/v1_1/dath9ga29/image/destroy`,
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/destroy`,
       { method: 'POST', body: formData }
     );
   } catch (err) {

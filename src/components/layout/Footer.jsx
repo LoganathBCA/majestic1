@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { buildWhatsAppUrl, INSTAGRAM_URL, MAPS_URL } from '../../constants/contact';
+import { buildWhatsAppUrl, INSTAGRAM_URL } from '../../constants/contact';
 
 const Footer = () => {
   const { openSubscribe } = useAuth();

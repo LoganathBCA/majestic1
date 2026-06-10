@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { buildWhatsAppUrl, WHATSAPP_DISPLAY, SUPPORT_EMAIL, MAPS_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../constants/contact';
+import { buildWhatsAppUrl, WHATSAPP_NUMBER, WHATSAPP_DISPLAY, SUPPORT_EMAIL, MAPS_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../constants/contact';
 
 const Contact = () => {
   // State for accordion active FAQ index
@@ -119,7 +119,9 @@ const Contact = () => {
                 </div>
                 <div className="channel-info">
                   <span className="channel-label">CALL US</span>
-                  <span className="channel-value">{WHATSAPP_DISPLAY}</span>
+                  <a href={`tel:+${WHATSAPP_NUMBER}`} className="channel-link">
+                    {WHATSAPP_DISPLAY}
+                  </a>
                 </div>
               </div>
 

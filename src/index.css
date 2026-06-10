@@ -770,7 +770,8 @@ ul, ol {
     display: flex;
   }
   .navbar-actions .btn-signin-nav {
-    display: none; /* Hide desktop button, keep mobile drawer button visible */
+    padding: 6px 12px;
+    font-size: 13px;
   }
 
   /* Footer Mobile Layout */
